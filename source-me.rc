@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
