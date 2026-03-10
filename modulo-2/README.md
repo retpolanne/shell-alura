@@ -67,14 +67,14 @@ Encontrando todos os links em um repo:
 ### Usando custom input field separators
 
 Um [IFS](https://en.wikipedia.org/wiki/Input_Field_Separators) é o que separa textos no Bash. Por [padrão](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting-1)
-o valor é <space><tab><newline>.
+o valor é <space><tab><newline>. Lembrando que esse é o comportamento padrão do bash, e outros shells podem ter comportamentos diferentes.
 
 ## Exemplos interessantes
 
 ### Usando sort, for, uniq e heredocs para mostrar quantas vezes palavras se repetem
 
 ``` sh
-for word in $(cat /dev/stdin); do echo "$word" | grep -Po "\w+"; done <<EOF | sort | uniq -c | sort -n | tac
+for line in $(cat /dev/stdin); do echo "$line" | grep -Po "\w+"; done <<EOF | sort | uniq -c | sort -n | tac
 All’s well that ends well.
 Nature abhors a vacuum.
 Every man has a price.
