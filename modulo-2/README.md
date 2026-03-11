@@ -115,36 +115,10 @@ Também podemos analisar os logs crus, como por exemplo `tail -f /var/log/auth.l
 ``` sh
 diff <(jq '.' exemplo1.json) <(jq '.' exemplo2.json)
 ```
+# Excluindo diretórios com find
 
-### Gerando uma cert chain de SSL
+Talvez você queira listar arquivos mas evitar que o find faça o percurso de ir em diretórios grandes, como `.git`.
 
-Vendo todos os certs da Alura.
-
-``` sh
-openssl s_client -showcerts -connect alura.com.br:443 </dev/null
+```sh
+find . -type d -name ".git" -prune -o -name "*"
 ```
-
-Obtendo o certificado leaf da Alura.
-
-``` sh
-openssl s_client -connect alura.com.br:443 </dev/null 2>/dev/null | openssl x509
-```
-
-Obtendo o intermediate certificate da Alura.
-
-``` sh
-openssl s_client -showcerts -connect alura.com.br:443 </dev/null 2>/dev/null
-```
-
-Encontrando certificados raíz.
-
-``` sh
-find /etc/ssl/certs/ -name "GTS*"
-```
-
-É possível montar toda a chain de certificados da Alura:
-
-``` sh
-openssl s_client -showcerts -connect alura.com.br:443 </dev/null 2>/dev/null | grep -Pzo ".*BEGIN CERTIFICATE.*(?s).*?END CERTIFICATE(?-s).*\n"
-```
-

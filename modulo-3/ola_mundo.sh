@@ -17,7 +17,7 @@ readonly NAME="Neco Coneco"
 export NAME
 
 # Lendo outro arquivo .sh com funções, biblioteca, etc. 
-source miau.sh
+source "$(dirname "$0")/miau.sh"
 
 # É recomendado ter uma função de erro pra mandar logs de erro pro STDERR. 
 err() {
@@ -33,14 +33,14 @@ function meow_meow() {
 # Use \ para quebrar linhas e pipelines
 find /usr/share/man \
   | head -100 \
-  | xargs man 2>/dev/null
+  | xargs man -P cat 2>/dev/null >/dev/null
 
 # do e then na mesma linha que for, while, if...
 for miau_counter in {1..100}; do
   meow_meow "$miau_counter"
 done
 
-if [[ "${NAME}" == "Neco*" ]]; then
+if [[ "${NAME}" =~ "Neco" ]]; then
   echo "${NAME}"
   # Essa função vem de outro arquivo.
   hello_everynyan
