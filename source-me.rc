@@ -3,6 +3,7 @@
 export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:\
 $(brew --prefix)/opt/gnu-sed/libexec/gnubin:\
 $(brew --prefix)/opt/findutils/libexec/gnubin:\
-$(brew --prefix)/opt/proctools/bin/:$PATH"
+$(brew --prefix)/opt/proctools/bin/:\
+$(brew --prefix)/Cellar/bash/5.3.9/bin:$PATH"
 
 export EDITOR="vim"

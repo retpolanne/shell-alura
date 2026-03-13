@@ -1,0 +1,11 @@
+createInstance
+deleteInstance
+getInstance
+getInstances
+getInstanceLogs
+getInstanceTop
+getPolicies
+deletePolicy
+getPolicy
+createPolicy
+updatePolicy
