@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source "$(dirname "$0")/lib/policies.sh" 
+
+read -r verb resource flags <<< "$@"
+
+case $resource in
+    policies|policy)
+        if [[ "${verb}" == "list" ]]; then
+            list_policies "${flags[@]}"
+        fi
+        ;;
+    *)
+        echo "Comando desconhecido" >&2
+        ;;
+esac

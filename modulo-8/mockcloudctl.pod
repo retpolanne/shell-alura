@@ -1,0 +1,18 @@
+=head1 Mock Cloud Controller
+
+=head2 mockcloudctl
+
+=head2 NAME
+
+mockcloudctl
+
+=head2 DESCRIPTION
+
+The B<mockcloudctl> tool is a tool used to control the Mock Cloud API without having to deal with
+API calls manually.
+
+B<mockcloudctl list policies> will show all policies.
+
+=head2 AUTHOR
+
+Anne Macedo

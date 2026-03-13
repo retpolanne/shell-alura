@@ -49,3 +49,10 @@ curl -X GET localhost:8080/instance/d4efe240-19c4-4067-bdf6-b198a15894ba/logs \
     -H "Authorization: Bearer ${token}" \
     -H "Content-Type: application/json"
 ```
+
+## Gerando a doc do mockcloudctl
+
+```sh
+pod2man mockcloudctl.pod > /tmp/mockcloudctl.1
+man /tmp/mockcloudctl.1
+```

@@ -39,6 +39,10 @@ echo "${crossing[@]}"
 # As expansões de string funcionam também para arrays
 echo "${crossing[@]/%/ aaaa}"
 
+for char in "${crossing[@]}"; do
+    echo "${char}"
+done
+
 # Arrays associativas
 declare -A CROSSING=(
     [Isabelle]="Dog"
