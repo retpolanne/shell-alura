@@ -12,18 +12,22 @@ done
 
 echo "For loop"
 # Use globbing aqui ao invés de ls /dev/ttys
-for file in /dev/ttys*; do
+for file in /dev/ttys{1..4}; do
     echo "$file"
 done
 
 echo "While loop"
-find /dev/ttys* | while read -r file; do
+find /dev/ttys{1..4} | while read -r file; do
     echo "$file"
 done
 
 echo "while, c style"
 i=0
 while (( i<10 )); do
+    if [[ "$i" == 2 ]]; then
+        i=$((i + 1))
+        continue
+    fi
     echo $i
     i=$((i + 1))
 done
@@ -31,7 +35,7 @@ done
 echo "Array"
 crossing=("Tom" "Isabelle" "Timmy")
 echo "${crossing[0]}"
-i=0
+i=1
 echo "${crossing[i]}"
 # Arrays são contextos matemáticos
 echo "${crossing[i+1]}"

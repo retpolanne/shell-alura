@@ -1,0 +1,1 @@
+{"id":"b7d4k8p1","timestamp":"2026-02-25T09:15:47Z","customer":{"name":"Carlos Mendes","email":"carlos.mendes@example.com","document":"987.654.321-00"},"items":[{"sku":"SKU-002","description":"USB-C Hub","quantity":1,"unit_price":159.9},{"sku":"SKU-021","description":"27-inch Monitor","quantity":2,"unit_price":1299.99}],"total_amount":2759.88,"currency":"BRL","status":"shipped"}

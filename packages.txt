@@ -2,3 +2,4 @@ shellcheck
 jq
 nginx
 binutils
+stress-ng

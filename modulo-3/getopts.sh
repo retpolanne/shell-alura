@@ -10,7 +10,7 @@ show_help() {
 }
 if [[ -z "$1" ]]; then
   show_help
-  exit
+  exit 1
 fi
 
 # O getopts usa a variável OPTIND como indicador da variável

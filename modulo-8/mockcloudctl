@@ -1,14 +1,35 @@
 #!/bin/bash
 
 source "$(dirname "$0")/lib/policies.sh" 
+source "$(dirname "$0")/lib/login.sh" 
+
+if [[ "$1" == "login" ]]; then
+    shift
+    login $* && exit 0 || exit 1
+fi
 
 read -r verb resource flags <<< "$@"
 
 case $resource in
+    login)
+        ;;
     policies|policy)
-        if [[ "${verb}" == "list" ]]; then
-            list_policies "${flags[@]}"
-        fi
+        case $verb in
+            "list")
+                list_policies ${flags[*]}
+                ;;
+            "create")
+                create_policy ${flags[*]}
+                ;;
+            "update")
+                update_policy ${flags[*]}
+                ;;
+            "delete")
+                delete_policy ${flags[*]}
+                ;;
+            *)
+                echo "Comando desconhecido para policies" >&2
+        esac
         ;;
     *)
         echo "Comando desconhecido" >&2
