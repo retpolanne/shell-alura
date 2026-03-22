@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "$0")/lib/utils.sh" 
+
 function login_help() {
     echo "mockcloudctl login
 
@@ -27,8 +29,7 @@ function login() {
                     echo "Por favor, digite a senha do usuário $user"
                     read password
                 else
-                    echo "Por favor, passe um nome de usuário" >&2
-                    exit 1
+                    err "Por favor, passe um nome de usuário"
                 fi
                 shift
                 shift
@@ -37,4 +38,10 @@ function login() {
                 break
         esac
     done
+    token=$(curl -s -X POST localhost:8080/login \
+        -d '{"username": "'$user'", "password": "'$password'"}' \
+        -H "Content-Type: application/json" \
+        | jq -r '.token')
+
+    create_token "$token"
 }

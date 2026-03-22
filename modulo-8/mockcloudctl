@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "$(dirname "$0")/lib/policies.sh" 
+source "$(dirname "$0")/lib/instances.sh" 
 source "$(dirname "$0")/lib/login.sh" 
 
 if [[ "$1" == "login" ]]; then
@@ -12,6 +13,25 @@ read -r verb resource flags <<< "$@"
 
 case $resource in
     login)
+        ;;
+    instances|instance)
+        case $verb in
+            "get")
+                if [[ "$resource" == "instances" ]]; then
+                    get_instances ${flags[*]}
+                else
+                    get_instance ${flags[*]}
+                fi
+                ;;
+            "create")
+                create_instance ${flags[*]}
+                ;;
+            "delete")
+                delete_instance ${flags[*]}
+                ;;
+            *)
+                echo "Comando desconhecido para instances" >&2
+        esac
         ;;
     policies|policy)
         case $verb in

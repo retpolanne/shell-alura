@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "$0")/lib/utils.sh" 
+
 function list_policies_help() {
     echo "mockcloudctl list policies
 
@@ -17,7 +19,11 @@ function list_policies() {
                 break
         esac
     done
-    echo "List policies"
+    token=$(get_token)
+    [[ "$?" -gt 0 ]] && err "Token não encontrado, favor rodar mockcloudctl login"
+    curl --fail-with-body -X GET localhost:8080/policies \
+        -H "Authorization: Bearer ${token}" \
+        -H "Content-Type: application/json"
 }
 
 function create_policy_help() {
@@ -50,8 +56,7 @@ function create_policy() {
                 if [[ -n "$2" ]]; then
                     policy_json=$2
                 else
-                    echo "Por favor, passe um json de policy." >&2
-                    exit 1
+                    err "Por favor, passe um json de policy."
                 fi
                 shift
                 shift
@@ -61,6 +66,12 @@ function create_policy() {
         esac
     done
     echo "Create Policy from file $policy_json"
+    token=$(get_token)
+    [[ "$?" -gt 0 ]] && err "Token não encontrado, favor rodar mockcloudctl login"
+    curl --fail-with-body -X POST localhost:8080/policies \
+        -H "Authorization: Bearer ${token}" \
+        -H "Content-Type: application/json" \
+        -d @"$policy_json"
 }
 
 function update_policy_help() {
@@ -94,8 +105,7 @@ function update_policy() {
                 if [[ -n "$2" ]]; then
                     id=$2
                 else
-                    echo "Por favor, digite o id da policy a ser atualizada." >&2
-                    exit 1
+                    err "Por favor, digite o id da policy a ser atualizada."
                 fi
                 shift
                 shift
@@ -119,6 +129,12 @@ function update_policy() {
         exit 1
     fi
     echo "Update Policy from file $policy_json id $id"
+    token=$(get_token)
+    [[ "$?" -gt 0 ]] && err "Token não encontrado, favor rodar mockcloudctl login"
+    curl --fail-with-body -X PATCH "localhost:8080/policies/$id" \
+        -H "Authorization: Bearer ${token}" \
+        -H "Content-Type: application/json" \
+        -d @"$policy_json"
 }
 
 function delete_policy_help() {
@@ -146,8 +162,7 @@ function delete_policy() {
                 if [[ -n "$2" ]]; then
                     id=$2
                 else
-                    echo "Por favor, digite o id da policy a ser deletada." >&2
-                    exit 1
+                    err "Por favor, digite o id da policy a ser deletada."
                 fi
                 shift
                 shift
@@ -156,5 +171,12 @@ function delete_policy() {
                 break
         esac
     done
-    echo "delete Policy from file $policy_json id $id"
+    echo "Delete Policy id $id"
+    token=$(get_token)
+    [[ "$?" -gt 0 ]] && err "Token não encontrado, favor rodar mockcloudctl login"
+    curl --fail-with-body -X DELETE "localhost:8080/policies/$id" \
+        -H "Authorization: Bearer ${token}" \
+        -H "Content-Type: application/json" && \
+        echo "Policy deletada com sucesso" || \
+        err "Erro ao deletar policy"
 }
