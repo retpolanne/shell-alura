@@ -1,0 +1,13 @@
+groups:
+- name: cpu
+  labels:
+    team: myteam
+  rules:
+    - alert: HostHighCpuLoad
+      expr: 1 - (avg without (cpu) (rate(node_cpu_seconds_total{mode="idle"}[5m]))) > .80
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: Host high CPU load (instance {{ $labels.instance }})
+        description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
