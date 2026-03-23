@@ -13,6 +13,8 @@ API calls manually.
 
 B<mockcloudctl list policies> will show all policies.
 
+B<mockcloudctl get policy --id example> will get a specific policy.
+
 =head2 AUTHOR
 
 Anne Macedo

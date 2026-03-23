@@ -29,6 +29,12 @@ case $resource in
             "delete")
                 delete_instance ${flags[*]}
                 ;;
+            "top")
+                top_instance ${flags[*]}
+                ;;
+            "log")
+                log_instance ${flags[*]}
+                ;;
             *)
                 echo "Comando desconhecido para instances" >&2
         esac

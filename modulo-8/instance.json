@@ -1,0 +1,6 @@
+{
+    "fqdn": "staging.alura.com",
+    "memory": 1024,
+    "cpu": 2,
+    "user_data": "echo 'provisioned!'"
+}
